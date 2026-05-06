@@ -1,7 +1,20 @@
-*.log
-.env
-credentials/
-identity/
-sessions/
-*.tmp
-*.bak
+# Ignore everything by default
+*
+
+# Then explicitly allow what we want to track
+!openclaw.json
+!.gitignore
+
+# Common config directories
+!cron/
+!cron/*.json
+!hooks/
+!hooks/**/*
+!subagents/
+!subagents/*
+!plugins/
+!plugins/installs.json
+!flows/
+!flows/*
+flows/registry.sqlite-shm
+flows/registry.sqlite-wal
