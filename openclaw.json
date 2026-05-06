@@ -1,0 +1,681 @@
+{
+  "gateway": {
+    "mode": "local",
+    "auth": {
+      "mode": "token",
+      "token": "${OPENCLAW_GATEWAY_TOKEN}"
+    },
+    "port": 18789,
+    "bind": "loopback",
+    "tailscale": {
+      "mode": "off",
+      "resetOnExit": false
+    }
+  },
+  "meta": {
+    "lastTouchedVersion": "2026.5.4",
+    "lastTouchedAt": "2026-05-06T08:41:54.769Z"
+  },
+  "models": {
+    "providers": {
+      "minimax": {
+        "baseUrl": "https://api.minimaxi.com/v1",
+        "apiKey": "${MINIMAX_API_KEY}",
+        "api": "openai-completions",
+        "models": [
+          {
+            "id": "MiniMax-M2.7",
+            "name": "MiniMax M2.7"
+          },
+          {
+            "id": "MiniMax-M2.5",
+            "name": "MiniMax M2.5"
+          },
+          {
+            "id": "image-01",
+            "name": "MiniMax Image-01"
+          }
+        ]
+      }
+    }
+  },
+  "channels": {
+    "telegram": {
+      "enabled": true,
+      "proxy": "socks5://127.0.0.1:6984",
+      "dmPolicy": "open",
+      "allowFrom": [
+        "*"
+      ],
+      "defaultAccount": "default",
+      "accounts": {
+        "default": {
+          "enabled": true,
+          "botToken": "${TELEGRAM_BOT_TOKEN_DEFAULT}",
+          "proxy": "socks5://127.0.0.1:6984",
+          "dmPolicy": "allowlist",
+          "allowFrom": [
+            7754385134
+          ]
+        },
+        "moling": {
+          "enabled": true,
+          "botToken": "${TELEGRAM_BOT_TOKEN_MOLING}",
+          "proxy": "socks5://127.0.0.1:6984",
+          "dmPolicy": "allowlist",
+          "allowFrom": [
+            7754385134
+          ]
+        },
+        "xingchen": {
+          "enabled": true,
+          "botToken": "${TELEGRAM_BOT_TOKEN_XINGCHEN}",
+          "proxy": "socks5://127.0.0.1:6984",
+          "dmPolicy": "allowlist",
+          "allowFrom": [
+            7754385134
+          ]
+        },
+        "wuji": {
+          "enabled": true,
+          "botToken": "${TELEGRAM_BOT_TOKEN_WUJI}",
+          "proxy": "socks5://127.0.0.1:6984",
+          "dmPolicy": "allowlist",
+          "allowFrom": [
+            7754385134
+          ]
+        }
+      }
+    }
+  },
+  "plugins": {
+    "slots": {
+      "memory": "memory-lancedb-pro"
+    },
+    "entries": {
+      "memory-lancedb-pro": {
+        "enabled": true,
+        "hooks": {
+          "allowConversationAccess": true
+        },
+        "config": {
+          "embedding": {
+            "provider": "openai-compatible",
+            "apiKey": "ollama",
+            "baseURL": "http://localhost:11434/v1",
+            "model": "bge-m3",
+            "dimensions": 1024
+          },
+          "retrieval": {
+            "rerank": "cross-encoder",
+            "rerankApiKey": "${SILICONFLOW_API_KEY}",
+            "rerankModel": "Qwen/Qwen3-Reranker-8B",
+            "rerankEndpoint": "https://api.siliconflow.cn/v1/rerank",
+            "rerankProvider": "siliconflow"
+          },
+          "autoCapture": false,
+          "autoRecall": true,
+          "smartExtraction": true,
+          "extractMinMessages": 2,
+          "extractMaxChars": 8000,
+          "sessionMemory": {
+            "enabled": false
+          },
+          "enableManagementTools": true,
+          "selfImprovement": {
+            "enabled": true
+          }
+        }
+      },
+      "minimax": {
+        "enabled": true,
+        "config": {
+          "webSearch": {
+            "apiKey": "${MINIMAX_API_KEY}"
+          }
+        }
+      },
+      "memory-wiki": {
+        "enabled": true
+      },
+      "searxng": {
+        "enabled": true,
+        "config": {
+          "webSearch": {
+            "baseUrl": "http://127.0.0.1:5088"
+          }
+        }
+      },
+      "tavily": {
+        "enabled": true,
+        "config": {
+          "webSearch": {
+            "apiKey": "${TAVILY_KEY_2}"
+          }
+        }
+      },
+      "browser": {
+        "enabled": true
+      }
+    },
+    "load": {
+      "paths": [
+        "/home/morav/.openclaw/workspace/node_modules/memory-lancedb-pro"
+      ]
+    }
+  },
+  "tools": {
+    "web": {
+      "search": {
+        "provider": "tavily"
+      }
+    },
+    "profile": "coding"
+  },
+  "agents": {
+    "defaults": {
+      "imageGenerationModel": {
+        "primary": "minimax/image-01"
+      },
+      "workspace": "/home/morav/.openclaw/workspace"
+    },
+    "list": [
+      {
+        "id": "main",
+        "workspace": "/home/morav/.openclaw/workspace",
+        "skills": [
+          "agent-browser",
+          "agent-creator",
+          "Auto-Update (OpenClaw + Skills)",
+          "automation-design",
+          "blogwatcher",
+          "browser-automation",
+          "clawhub",
+          "goplaces",
+          "healthcheck",
+          "mcporter",
+          "minimax-tts",
+          "n8n",
+          "openclaw-md-guide",
+          "Proactivity (Proactive Agent)",
+          "self-improvement-loop",
+          "session-logs",
+          "skill-creator",
+          "skill-security-auditor",
+          "skills-improvement",
+          "task-father",
+          "task-tracker-pro",
+          "taskflow",
+          "taskflow-inbox-triage",
+          "tavily",
+          "wiki-maintainer",
+          "windows-docker-wsl2",
+          "metacognition-protocol",
+          "github"
+        ],
+        "tools": {
+          "alsoAllow": [
+            "agents_list",
+            "browser",
+            "canvas",
+            "dir_fetch",
+            "dir_list",
+            "file_fetch",
+            "file_write",
+            "gateway",
+            "heartbeat_respond",
+            "memory_archive",
+            "memory_compact",
+            "memory_explain_rank",
+            "memory_forget",
+            "memory_list",
+            "memory_promote",
+            "memory_recall",
+            "memory_stats",
+            "memory_store",
+            "memory_update",
+            "message",
+            "self_improvement_extract_skill",
+            "self_improvement_log",
+            "self_improvement_review",
+            "tavily_extract",
+            "tavily_search",
+            "tts",
+            "wiki_apply",
+            "wiki_get",
+            "wiki_lint",
+            "wiki_search",
+            "wiki_status"
+          ],
+          "deny": [
+            "nodes",
+            "video_generate"
+          ]
+        }
+      },
+      {
+        "id": "moling",
+        "name": "moling",
+        "workspace": "/home/morav/.openclaw/agents/moling/workspace",
+        "agentDir": "/home/morav/.openclaw/agents/moling/agent",
+        "skills": [
+          "skill-creator",
+          "taskflow",
+          "taskflow-inbox-triage",
+          "tavily",
+          "wiki-maintainer",
+          "browser-automation",
+          "Deep Research",
+          "gemini-deep-research",
+          "Market Research",
+          "multi-source-research",
+          "reddit-readonly",
+          "report-searcher"
+        ],
+        "tools": {
+          "alsoAllow": [
+            "agents_list",
+            "browser",
+            "canvas",
+            "dir_fetch",
+            "dir_list",
+            "file_fetch",
+            "file_write",
+            "gateway",
+            "heartbeat_respond",
+            "memory_archive",
+            "memory_compact",
+            "memory_explain_rank",
+            "memory_forget",
+            "memory_list",
+            "memory_promote",
+            "memory_recall",
+            "memory_stats",
+            "memory_store",
+            "memory_update",
+            "message",
+            "nodes",
+            "tavily_extract",
+            "tavily_search",
+            "tts",
+            "wiki_apply",
+            "wiki_get",
+            "wiki_lint",
+            "wiki_search",
+            "wiki_status",
+            "self_improvement_review"
+          ],
+          "deny": [
+            "web_search",
+            "video_generate",
+            "x_search",
+            "self_improvement_log",
+            "self_improvement_extract_skill"
+          ]
+        }
+      },
+      {
+        "id": "wuji",
+        "name": "wuji",
+        "workspace": "/home/morav/.openclaw/agents/wuji/workspace",
+        "agentDir": "/home/morav/.openclaw/agents/wuji/agent",
+        "skills": [
+          "blucli",
+          "bluebubbles",
+          "browser-automation",
+          "clawhub",
+          "coding-agent",
+          "eightctl",
+          "github",
+          "healthcheck",
+          "imsg",
+          "mcporter",
+          "model-usage",
+          "nano-pdf",
+          "node-connect",
+          "notion",
+          "obsidian",
+          "openai-whisper",
+          "openai-whisper-api",
+          "openhue",
+          "oracle",
+          "ordercli",
+          "peekaboo",
+          "sag",
+          "session-logs",
+          "sherpa-onnx-tts",
+          "skill-creator",
+          "slack",
+          "songsee",
+          "sonoscli",
+          "spotify-player",
+          "summarize",
+          "taskflow",
+          "taskflow-inbox-triage",
+          "tavily",
+          "things-mac",
+          "tmux",
+          "trello",
+          "video-frames",
+          "voice-call",
+          "wacli",
+          "weather",
+          "wiki-maintainer",
+          "xurl"
+        ],
+        "tools": {
+          "profile": "coding",
+          "alsoAllow": [
+            "agents_list",
+            "browser",
+            "canvas",
+            "dir_fetch",
+            "dir_list",
+            "file_fetch",
+            "file_write",
+            "gateway",
+            "heartbeat_respond",
+            "memory_archive",
+            "memory_compact",
+            "memory_explain_rank",
+            "memory_forget",
+            "memory_list",
+            "memory_promote",
+            "memory_recall",
+            "memory_stats",
+            "memory_store",
+            "memory_update",
+            "message",
+            "nodes",
+            "self_improvement_extract_skill",
+            "self_improvement_log",
+            "self_improvement_review",
+            "tavily_extract",
+            "tavily_search",
+            "tts",
+            "wiki_apply",
+            "wiki_get",
+            "wiki_lint",
+            "wiki_search",
+            "wiki_status"
+          ],
+          "deny": [
+            "x_search"
+          ]
+        }
+      },
+      {
+        "id": "xingchen",
+        "name": "xingchen",
+        "workspace": "/home/morav/.openclaw/agents/xingchen/workspace",
+        "agentDir": "/home/morav/.openclaw/agents/xingchen/agent",
+        "tools": {
+          "profile": "coding",
+          "alsoAllow": [
+            "agents_list",
+            "browser",
+            "canvas",
+            "dir_fetch",
+            "dir_list",
+            "file_fetch",
+            "file_write",
+            "gateway",
+            "heartbeat_respond",
+            "memory_archive",
+            "memory_compact",
+            "memory_explain_rank",
+            "memory_forget",
+            "memory_list",
+            "memory_promote",
+            "memory_recall",
+            "memory_stats",
+            "memory_store",
+            "memory_update",
+            "message",
+            "nodes",
+            "self_improvement_extract_skill",
+            "self_improvement_log",
+            "self_improvement_review",
+            "tavily_extract",
+            "tavily_search",
+            "tts",
+            "wiki_apply",
+            "wiki_get",
+            "wiki_lint",
+            "wiki_search",
+            "wiki_status"
+          ]
+        }
+      }
+    ]
+  },
+  "messages": {
+    "tts": {
+      "providers": {
+        "minimax": {
+          "apiKey": "${MINIMAX_API_KEY}",
+          "model": "speech-2.8-hd",
+          "voiceId": "English_expressive_narrator",
+          "baseUrl": "https://api.minimaxi.com/v1"
+        }
+      }
+    },
+    "groupChat": {
+      "visibleReplies": "message_tool"
+    }
+  },
+  "skills": {
+    "entries": {
+      "healthcheck": {
+        "enabled": true
+      },
+      "openai-whisper": {
+        "enabled": false
+      },
+      "skill-creator": {
+        "enabled": true
+      },
+      "taskflow-inbox-triage": {
+        "enabled": true
+      },
+      "video-frames": {
+        "enabled": false
+      },
+      "bluebubbles": {
+        "enabled": false
+      },
+      "camsnap": {
+        "enabled": false
+      },
+      "coding-agent": {
+        "enabled": false
+      },
+      "clawhub": {
+        "enabled": true
+      },
+      "discord": {
+        "enabled": false
+      },
+      "gemini": {
+        "enabled": false
+      },
+      "eightctl": {
+        "enabled": false
+      },
+      "gh-issues": {
+        "enabled": false
+      },
+      "gifgrep": {
+        "enabled": false
+      },
+      "github": {
+        "enabled": true
+      },
+      "gog": {
+        "enabled": true
+      },
+      "goplaces": {
+        "enabled": false
+      },
+      "imsg": {
+        "enabled": false
+      },
+      "himalaya": {
+        "enabled": false
+      },
+      "mcporter": {
+        "enabled": false
+      },
+      "model-usage": {
+        "enabled": false
+      },
+      "nano-pdf": {
+        "enabled": false
+      },
+      "notion": {
+        "enabled": false
+      },
+      "obsidian": {
+        "enabled": false
+      },
+      "openai-whisper-api": {
+        "enabled": false
+      },
+      "oracle": {
+        "enabled": false
+      },
+      "openhue": {
+        "enabled": false
+      },
+      "ordercli": {
+        "enabled": false
+      },
+      "peekaboo": {
+        "enabled": false
+      },
+      "songsee": {
+        "enabled": false
+      },
+      "sonoscli": {
+        "enabled": false
+      },
+      "slack": {
+        "enabled": false
+      },
+      "spotify-player": {
+        "enabled": false
+      },
+      "things-mac": {
+        "enabled": false
+      },
+      "tmux": {
+        "enabled": false
+      },
+      "trello": {
+        "enabled": false
+      },
+      "voice-call": {
+        "enabled": false
+      },
+      "wacli": {
+        "enabled": false
+      },
+      "xurl": {
+        "enabled": false
+      },
+      "1password": {
+        "enabled": false
+      },
+      "apple-notes": {
+        "enabled": false
+      },
+      "apple-reminders": {
+        "enabled": false
+      },
+      "bear-notes": {
+        "enabled": false
+      },
+      "blogwatcher": {
+        "enabled": false
+      },
+      "blucli": {
+        "enabled": false
+      },
+      "gemini-deep-research": {
+        "enabled": true,
+        "apiKey": "${GEMINI_API_KEY}"
+      },
+      "minimax-tts": {
+        "enabled": false
+      },
+      "n8n": {
+        "enabled": false
+      },
+      "sag": {
+        "enabled": false
+      },
+      "sherpa-onnx-tts": {
+        "enabled": false
+      },
+      "summarize": {
+        "enabled": false
+      },
+      "node-connect": {
+        "enabled": false
+      }
+    },
+    "install": {
+      "nodeManager": "npm"
+    }
+  },
+  "session": {
+    "dmScope": "per-channel-peer"
+  },
+  "wizard": {
+    "lastRunAt": "2026-05-06T04:36:45.848Z",
+    "lastRunVersion": "2026.5.4",
+    "lastRunCommand": "doctor",
+    "lastRunMode": "local"
+  },
+  "bindings": [
+    {
+      "agentId": "main",
+      "match": {
+        "channel": "telegram",
+        "accountId": "default"
+      }
+    },
+    {
+      "agentId": "moling",
+      "match": {
+        "channel": "telegram",
+        "accountId": "moling"
+      }
+    },
+    {
+      "agentId": "wuji",
+      "match": {
+        "channel": "telegram",
+        "accountId": "wuji"
+      }
+    },
+    {
+      "agentId": "xingchen",
+      "match": {
+        "channel": "telegram",
+        "accountId": "xingchen"
+      }
+    }
+  ],
+  "ui": {
+    "assistant": {
+      "name": "",
+      "avatar": "https://tse1-mm.cn.bing.net/th/id/OIP-C.sJgNcmpf8Xx7wOcHltWGuwAAAA?w=191&h=185&c=7&r=0&o=7&dpr=1.3&pid=1.7&rm=3"
+    }
+  },
+  "commands": {
+    "text": true,
+    "plugins": true,
+    "useAccessGroups": false
+  }
+}

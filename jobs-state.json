@@ -1,0 +1,67 @@
+{
+  "version": 1,
+  "jobs": {
+    "fd9c4c5c-0aeb-44e8-880a-13b3396c2ce5": {
+      "updatedAtMs": 1778056574969,
+      "scheduleIdentity": "{\"version\":1,\"enabled\":true,\"schedule\":{\"kind\":\"every\",\"everyMs\":10800000,\"anchorMs\":1777916614883}}",
+      "state": {
+        "nextRunAtMs": 1778067352837,
+        "lastRunAtMs": 1778056552837,
+        "lastRunStatus": "ok",
+        "lastStatus": "ok",
+        "lastDurationMs": 22132,
+        "lastDeliveryStatus": "not-delivered",
+        "consecutiveErrors": 0,
+        "consecutiveSkipped": 0,
+        "lastDelivered": false
+      }
+    },
+    "5234ad13-4e14-402f-82e5-14807165869d": {
+      "updatedAtMs": 1778056665887,
+      "scheduleIdentity": "{\"version\":1,\"enabled\":true,\"schedule\":{\"kind\":\"every\",\"everyMs\":10800000,\"anchorMs\":1777916614870}}",
+      "state": {
+        "nextRunAtMs": 1778067438597,
+        "lastRunAtMs": 1778056638597,
+        "lastRunStatus": "error",
+        "lastStatus": "error",
+        "lastDurationMs": 27290,
+        "lastDelivered": false,
+        "lastDeliveryStatus": "unknown",
+        "consecutiveErrors": 1,
+        "consecutiveSkipped": 0,
+        "lastError": "cron: job interrupted by gateway restart",
+        "lastDeliveryError": "cron: job interrupted by gateway restart"
+      }
+    },
+    "27218ebf-2991-49d5-a1da-5df024795478": {
+      "updatedAtMs": 1778056713097,
+      "scheduleIdentity": "{\"version\":1,\"enabled\":true,\"schedule\":{\"kind\":\"every\",\"everyMs\":10800000,\"anchorMs\":1777916614921}}",
+      "state": {
+        "nextRunAtMs": 1778067486275,
+        "lastRunAtMs": 1778056686275,
+        "lastRunStatus": "ok",
+        "lastStatus": "ok",
+        "lastDurationMs": 26822,
+        "lastDeliveryStatus": "not-delivered",
+        "consecutiveErrors": 0,
+        "consecutiveSkipped": 0,
+        "lastDelivered": false
+      }
+    },
+    "d158c539-6a04-4b9b-9b97-d314b33ede6d": {
+      "updatedAtMs": 1778053143444,
+      "scheduleIdentity": "{\"version\":1,\"enabled\":true,\"schedule\":{\"kind\":\"every\",\"everyMs\":18000000,\"anchorMs\":1778036572624}}",
+      "state": {
+        "nextRunAtMs": 1778071111476,
+        "lastRunAtMs": 1778053111476,
+        "lastRunStatus": "ok",
+        "lastStatus": "ok",
+        "lastDurationMs": 31968,
+        "lastDeliveryStatus": "not-delivered",
+        "consecutiveErrors": 0,
+        "consecutiveSkipped": 0,
+        "lastDelivered": false
+      }
+    }
+  }
+}

@@ -1,0 +1,7 @@
+*.log
+.env
+credentials/
+identity/
+sessions/
+*.tmp
+*.bak
